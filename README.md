@@ -1,4 +1,4 @@
-# Bird Sightings
+# Hotel Bookings
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,html,css,mongodb,express)](https://skillicons.dev)
 
