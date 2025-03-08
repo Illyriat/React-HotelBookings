@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./Bookings.css";
 
 const Booking = ({ booking, deleteBookings }) => {
     const navigate = useNavigate();
@@ -7,23 +8,22 @@ const Booking = ({ booking, deleteBookings }) => {
     const handleDelete = () => {
         deleteBookings(booking._id);
     };
-    
 
-    function handleUpdate() {
-        const id = booking._id;
-        navigate(`/update/${id}`);
-    }
+    const handleUpdate = () => {
+        navigate(`/update/${booking._id}`);
+    };
 
     return (
-        <>
-            <h4>Name: {booking.guest_name}</h4>
-            <p>E-Mail: {booking.guest_email}</p>
-            <p>Checked In (tick the box if checked in): {booking.checked_in ? "Yes" : "No"}</p>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleUpdate}>Update</button>
-        </>
+        <div className="booking-card">
+            <h4>{booking.guest_name}</h4>
+            <p><strong>Email:</strong> {booking.guest_email}</p>
+            <p><strong>Checked In:</strong> {booking.checked_in ? "✅ Yes" : "❌ No"}</p>
+            <div className="buttons">
+                <button className="delete-button" onClick={handleDelete}>Delete</button>
+                <button className="update-button" onClick={handleUpdate}>Update</button>
+            </div>
+        </div>
     );
 };
 
 export default Booking;
-

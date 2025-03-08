@@ -23,7 +23,7 @@ const BookingsService = {
     // Update an existing booking
     updateBooking(id, updatedData) {
         const dataToUpdate = { ...updatedData };
-        delete dataToUpdate._id; // Ensure `_id` is removed before sending
+        delete dataToUpdate._id;
     
         return fetch(`${baseURL}${id}`, {
             method: "PUT",
@@ -40,7 +40,7 @@ const BookingsService = {
                 if (!res.ok) {
                     throw new Error("Failed to delete booking");
                 }
-                return res.json(); // Ensure we handle the response
+                return res.json();
             })
             .catch(err => console.error("Error deleting booking:", err));
     },

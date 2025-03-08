@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingsService from "../services/BookingsServices";
+import "./UpdateBooking.css";
 
 const UpdateBooking = () => {
     const { id } = useParams();
@@ -28,25 +29,24 @@ const UpdateBooking = () => {
     
         setFormData({
             ...formData,
-            [name]: type === "checkbox" ? checked : value // Ensure booleans for checkboxes
+            [name]: type === "checkbox" ? checked : value 
         });
     };
-    
 
     const handleSubmit = (event) => {
         event.preventDefault();
         BookingsService.updateBooking(id, formData)
-            .then(() => navigate("/")) // Redirect home after update
+            .then(() => navigate("/"))
             .catch((err) => console.error("Error updating booking:", err));
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p className="loading">Loading...</p>;
+    if (error) return <p className="error">{error}</p>;
 
     return (
-        <div>
+        <div className="update-booking-container">
             <h2>Update Booking</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="booking-form">
                 <label>Name:</label>
                 <input 
                     type="text"
@@ -55,7 +55,7 @@ const UpdateBooking = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
+
                 <label>Email:</label>
                 <input 
                     type="email"
@@ -64,17 +64,21 @@ const UpdateBooking = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
-                <label>Checked In:</label>
-                <input 
-                    type="checkbox"
-                    name="checked_in"
-                    checked={formData?.checked_in || false}
-                    onChange={handleChange}
-                />
-                <br />
-                <button type="submit">Update</button>
-                <button type="button" onClick={() => navigate("/")}>Cancel</button>
+
+                <label className="checkbox-label">
+                    <input 
+                        type="checkbox"
+                        name="checked_in"
+                        checked={formData?.checked_in || false}
+                        onChange={handleChange}
+                    />
+                    Checked In
+                </label>
+
+                <div className="buttons">
+                    <button type="submit" className="update-button">Update</button>
+                    <button type="button" className="cancel-button" onClick={() => navigate("/")}>Cancel</button>
+                </div>
             </form>
         </div>
     );

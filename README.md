@@ -15,7 +15,7 @@ Install dependencies in both the client and the server folders:
 #### Client
 
 ```
-cd client/hotel_bookings
+cd client
 npm install
 ```
 
@@ -50,3 +50,8 @@ The Server will listen on Port:9000
 
 ## UI
 
+Home Page
+![Home](./imgs/BookingHome.JPG)
+
+Update Page
+![Update](./imgs/BookingUpdate.JPG)

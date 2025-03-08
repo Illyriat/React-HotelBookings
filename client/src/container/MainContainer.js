@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BookingForm from "../components/BookingForm.js";
-import BookingList from "../components/BookingList.js";
-import BookingsService from "../services/BookingsServices.js";
+import BookingForm from "../components/BookingForm";
+import BookingList from "../components/BookingList";
+import BookingsService from "../services/BookingsServices";
+import "./MainContainer.css";
 
 const MainContainer = () => {
     const [bookings, setBookings] = useState([]);
     const navigate = useNavigate();
 
-
     // Fetch bookings when component mounts or when returning from update
     useEffect(() => {
-      BookingsService.getBookings()
-          .then((bookings) => setBookings(bookings))
-          .catch((err) => console.error("Error fetching bookings:", err));
-  }, []);
-  
+        BookingsService.getBookings()
+            .then((bookings) => setBookings(bookings))
+            .catch((err) => console.error("Error fetching bookings:", err));
+    }, []);
 
     // Add a new booking
     const createBookings = (newBooking) => {
@@ -27,7 +26,6 @@ const MainContainer = () => {
             return [...prevBookings, newBooking];
         });
     };
-    
 
     // Delete a booking
     const deleteBookings = (idToDelete) => {
@@ -37,24 +35,27 @@ const MainContainer = () => {
             })
             .catch((err) => console.error("Error deleting booking:", err));
     };
-    
-  
+
     // Navigate to update page
     const updateBooking = (id, updatedData) => {
-      BookingsService.updateBooking(id, updatedData)
-          .then(() => BookingsService.getBookings()) // Fetch updated data after update
-          .then((updatedBookings) => {
-              setBookings(updatedBookings); // Update state to reflect the new changes
-              navigate("/"); // Redirect to home page
-          })
-          .catch((err) => console.error("Error updating booking:", err));
-  };
+        BookingsService.updateBooking(id, updatedData)
+            .then(() => BookingsService.getBookings()) // Fetch updated data after update
+            .then((updatedBookings) => {
+                setBookings(updatedBookings); // Update state to reflect the new changes
+                navigate("/"); // Redirect to home page
+            })
+            .catch((err) => console.error("Error updating booking:", err));
+    };
 
     return (
-        <>
-            <BookingForm createBookings={createBookings} />
-            <BookingList bookings={bookings} deleteBookings={deleteBookings} updateBooking={updateBooking} />
-        </>
+        <div className="main-container">
+            <div className="booking-form-container">
+                <BookingForm createBookings={createBookings} />
+            </div>
+            <div className="booking-list-container">
+                <BookingList bookings={bookings} deleteBookings={deleteBookings} updateBooking={updateBooking} />
+            </div>
+        </div>
     );
 };
 

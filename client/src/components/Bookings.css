@@ -1,0 +1,104 @@
+/* Ensure bookings are contained within a max width */
+.bookings-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Grid layout for bookings */
+.bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Individual booking card */
+.booking-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+    max-width: 280px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.booking-card:hover {
+    transform: translateY(-5px);
+}
+
+/* No bookings message */
+.no-bookings {
+    text-align: center;
+    color: #888;
+    font-size: 1.2em;
+}
+
+/* Text styling */
+h4 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #555;
+    font-size: 0.95em;
+    margin: 5px 0;
+}
+
+/* Button styling */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.delete-button {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background: #c82333;
+}
+
+.update-button {
+    background: #007bff;
+    color: white;
+}
+
+.update-button:hover {
+    background: #0056b3;
+}
+
+
+/* Tablet: Show 2 bookings per row */
+@media (max-width: 1024px) {
+    .bookings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile: Show 1 booking per row */
+@media (max-width: 600px) {
+    .bookings-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
